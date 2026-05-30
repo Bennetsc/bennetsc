@@ -1,0 +1,162 @@
+/* ============================================================
+   Personal site — minimal, editorial, built to last.
+
+   Web-safe fonts only: no external requests, so the site loads
+   instantly, works offline, and depends on no one. Edit the look
+   by changing the variables below; everything else follows.
+   ============================================================ */
+
+:root {
+  --ink:        #1c1b19;   /* main text                          */
+  --ink-soft:   #6f6c65;   /* muted text: descriptions, dates     */
+  --paper:      #fcfbf8;   /* warm off-white background            */
+  --link:       #345776;   /* restrained ink-blue for links        */
+  --link-hover: #213b52;   /* darker on hover                      */
+  --rule:       #e7e4dd;   /* hairline dividers                    */
+  --measure:    640px;     /* reading width for essays             */
+  --sidebar:    200px;     /* sidebar width                        */
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Georgia, "Iowan Old Style", Palatino, "Palatino Linotype", serif;
+  font-size: 18px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a { color: var(--link); }
+a:hover { color: var(--link-hover); }
+
+/* ---- Layout: sidebar + content ------------------------------ */
+.layout {
+  display: flex;
+  align-items: flex-start;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+/* ---- Sidebar ------------------------------------------------ */
+.sidebar {
+  width: var(--sidebar);
+  flex: 0 0 var(--sidebar);
+  position: sticky;
+  top: 0;
+  padding: 56px 32px 56px 0;
+}
+
+.site-name {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0 0 30px 0;
+}
+.site-name a { color: var(--ink); text-decoration: none; }
+.site-name a:hover { color: var(--ink); }
+
+.nav { display: flex; flex-direction: column; gap: 11px; }
+.nav a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  font-size: 16px;
+}
+.nav a:hover { color: var(--ink); }
+.nav a.active {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: var(--rule);
+}
+
+/* ---- Content ------------------------------------------------ */
+.content {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: var(--measure);
+  padding: 56px 0 96px 0;
+}
+
+h1 {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin: 0 0 10px 0;
+}
+
+.lede {
+  font-size: 19px;
+  margin: 0 0 26px 0;
+}
+
+/* the one-line italic blurb under a section heading */
+.description {
+  color: var(--ink-soft);
+  font-style: italic;
+  font-size: 17px;
+  max-width: 34em;
+  margin: 0 0 38px 0;
+}
+
+/* ---- Directory list of essays ------------------------------- */
+.essays { list-style: none; margin: 0; padding: 0; }
+.essays li { margin: 0 0 14px 0; }
+.essays a {
+  text-decoration: none;
+  font-size: 19px;
+}
+.essays a:hover { text-decoration: underline; }
+.essays .date {
+  color: var(--ink-soft);
+  font-style: italic;
+  font-size: 14px;
+  margin-left: 8px;
+}
+
+.empty { color: var(--ink-soft); font-style: italic; }
+
+/* ---- Essay body --------------------------------------------- */
+article .meta {
+  color: var(--ink-soft);
+  font-style: italic;
+  font-size: 14px;
+  margin: 0 0 32px 0;
+}
+article p { margin: 0 0 20px 0; }
+article h2 { font-size: 21px; font-weight: 700; margin: 38px 0 12px 0; }
+article blockquote {
+  margin: 24px 0;
+  padding: 0 0 0 18px;
+  border-left: 2px solid var(--rule);
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+.back {
+  display: inline-block;
+  margin-top: 48px;
+  font-size: 15px;
+  text-decoration: none;
+}
+.back:hover { text-decoration: underline; }
+
+/* ---- Mobile: stack the sidebar on top ----------------------- */
+@media (max-width: 720px) {
+  .layout { flex-direction: column; padding: 0 22px; }
+  .sidebar {
+    width: auto;
+    flex: none;
+    position: static;
+    padding: 30px 0 0 0;
+  }
+  .site-name { margin-bottom: 14px; }
+  .nav { flex-direction: row; flex-wrap: wrap; gap: 18px; }
+  .content { padding: 26px 0 64px 0; max-width: none; }
+}
