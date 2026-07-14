@@ -56,10 +56,15 @@ a:hover { color: var(--link-hover); }
   font-size: 22px;
   font-weight: 700;
   letter-spacing: -0.01em;
-  margin: 0 0 30px 0;
+  margin: 0 0 6px 0;
+}
+.site-name:last-of-type {
+  margin-bottom: 30px; /* space before the nav */
 }
 .site-name a { color: var(--ink); text-decoration: none; }
 .site-name a:hover { color: var(--ink); }
+.site-name + .site-name a { color: #BA1000; }
+.site-name + .site-name a:hover { color: #BA1000; }
 
 .nav { display: flex; flex-direction: column; gap: 11px; }
 .nav a {
@@ -156,7 +161,8 @@ article blockquote {
     position: static;
     padding: 30px 0 0 0;
   }
-  .site-name { margin-bottom: 14px; }
+  .site-name { margin-bottom: 4px; }
+  .site-name:last-of-type { margin-bottom: 14px; }
   .nav { flex-direction: row; flex-wrap: wrap; gap: 18px; }
   .content { padding: 26px 0 64px 0; max-width: none; }
 }
