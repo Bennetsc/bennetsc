@@ -1,5 +1,5 @@
 /* ============================================================
-   Personal site — minimal, editorial, built to last.
+   Personal site — Napoleon frosted glass theme.
 
    Web-safe fonts only: no external requests, so the site loads
    instantly, works offline, and depends on no one. Edit the look
@@ -9,12 +9,12 @@
 :root {
   --ink:        #1c1b19;   /* main text                          */
   --ink-soft:   #6f6c65;   /* muted text: descriptions, dates     */
-  --paper:      #fcfbf8;   /* warm off-white background            */
+  --paper:      #fcfbf8;   /* warm off-white fallback             */
   --link:       #345776;   /* restrained ink-blue for links        */
   --link-hover: #213b52;   /* darker on hover                      */
   --rule:       #e7e4dd;   /* hairline dividers                    */
   --measure:    640px;     /* reading width for essays             */
-  --sidebar:    200px;     /* sidebar width                        */
+  --sidebar:    220px;     /* sidebar width                        */
 }
 
 * { box-sizing: border-box; }
@@ -22,13 +22,19 @@ html { -webkit-text-size-adjust: 100%; }
 
 body {
   margin: 0;
-  background: var(--paper);
+  background-color: var(--paper);
+  background-image: url("assets/coronation.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   color: var(--ink);
   font-family: Georgia, "Iowan Old Style", Palatino, "Palatino Linotype", serif;
   font-size: 18px;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  min-height: 100vh;
 }
 
 a { color: var(--link); }
@@ -40,7 +46,35 @@ a:hover { color: var(--link-hover); }
   align-items: flex-start;
   max-width: 980px;
   margin: 0 auto;
-  padding: 0 28px;
+  padding: 28px;
+  gap: 24px;
+}
+
+/* Shared frosted glass that fades into the painting */
+.sidebar,
+.content {
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.55) 0%,
+    rgba(255, 255, 255, 0.78) 35%,
+    rgba(255, 255, 255, 0.78) 65%,
+    rgba(255, 255, 255, 0.45) 100%
+  );
+  -webkit-backdrop-filter: blur(16px) saturate(1.15);
+  backdrop-filter: blur(16px) saturate(1.15);
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  -webkit-mask-image: radial-gradient(
+    ellipse 95% 92% at 50% 50%,
+    black 55%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    ellipse 95% 92% at 50% 50%,
+    black 55%,
+    transparent 100%
+  );
 }
 
 /* ---- Sidebar ------------------------------------------------ */
@@ -48,8 +82,8 @@ a:hover { color: var(--link-hover); }
   width: var(--sidebar);
   flex: 0 0 var(--sidebar);
   position: sticky;
-  top: 0;
-  padding: 56px 32px 56px 0;
+  top: 28px;
+  padding: 36px 28px;
 }
 
 .site-name {
@@ -66,18 +100,41 @@ a:hover { color: var(--link-hover); }
 .site-name + .site-name a { color: #BA1000; }
 .site-name + .site-name a:hover { color: #BA1000; }
 
+/* ---- Black pill nav buttons --------------------------------- */
 .nav { display: flex; flex-direction: column; gap: 11px; }
 .nav a {
-  color: var(--ink-soft);
+  display: inline-block;
+  color: #fff;
+  background: #111;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 15px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  text-align: center;
+  padding: 10px 20px;
+  border-radius: 999px;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.12) inset,
+    0 4px 10px rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(0, 0, 0, 0.35);
+  transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
 }
-.nav a:hover { color: var(--ink); }
+.nav a:hover {
+  color: #fff;
+  background: #2a2a2a;
+  transform: translateY(-1px);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.14) inset,
+    0 6px 14px rgba(0, 0, 0, 0.32);
+}
 .nav a.active {
-  color: var(--ink);
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  text-decoration-color: var(--rule);
+  color: #111;
+  background: #fff;
+  text-decoration: none;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 4px 10px rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(0, 0, 0, 0.12);
 }
 
 /* ---- Content ------------------------------------------------ */
@@ -85,7 +142,7 @@ a:hover { color: var(--link-hover); }
   flex: 1 1 auto;
   min-width: 0;
   max-width: var(--measure);
-  padding: 56px 0 96px 0;
+  padding: 40px 36px 56px;
 }
 
 h1 {
@@ -154,15 +211,33 @@ article blockquote {
 
 /* ---- Mobile: stack the sidebar on top ----------------------- */
 @media (max-width: 720px) {
-  .layout { flex-direction: column; padding: 0 22px; }
+  /* fixed backgrounds are unreliable on mobile browsers */
+  body { background-attachment: scroll; }
+
+  .layout {
+    flex-direction: column;
+    padding: 18px;
+    gap: 16px;
+  }
   .sidebar {
     width: auto;
     flex: none;
     position: static;
-    padding: 30px 0 0 0;
+    padding: 28px 24px;
   }
   .site-name { margin-bottom: 4px; }
   .site-name:last-of-type { margin-bottom: 14px; }
-  .nav { flex-direction: row; flex-wrap: wrap; gap: 18px; }
-  .content { padding: 26px 0 64px 0; max-width: none; }
+  .nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .nav a {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+  .content {
+    padding: 28px 24px 40px;
+    max-width: none;
+  }
 }
