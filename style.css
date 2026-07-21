@@ -1,6 +1,5 @@
 /* ============================================================
-   Personal site — villa background with frosted home /
-   framed inner pages.
+   Personal site — villa background with framed pages.
 
    Edit the look by changing the variables below;
    everything else follows.
@@ -29,6 +28,9 @@ html { -webkit-text-size-adjust: 100%; }
 
 body {
   margin: 0;
+  height: 100vh;
+  padding: var(--frame);
+  overflow: hidden;
   background-color: var(--paper);
   background-image: url("assets/villa.jpg");
   background-position: center;
@@ -41,7 +43,6 @@ body {
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  min-height: 100vh;
 }
 
 code, kbd, pre, samp {
@@ -51,31 +52,16 @@ code, kbd, pre, samp {
 a { color: var(--link); }
 a:hover { color: var(--link-hover); }
 
-/* ---- Layout: sidebar + content ------------------------------ */
+/* ---- Framed layout: sidebar + content ----------------------- */
 .layout {
   display: flex;
-  align-items: flex-start;
-  max-width: 980px;
-  margin: 0 auto;
-  padding: 28px;
-  gap: 24px;
-}
-
-/* ---- Framed pages (everything except index) ----------------- */
-body:not(.home) {
-  height: 100vh;
-  padding: var(--frame);
-  overflow: hidden;
-}
-
-body:not(.home) .layout {
+  align-items: stretch;
   max-width: none;
   width: 100%;
   height: calc(100vh - (var(--frame) * 2));
   margin: 0;
   padding: 0;
   gap: 0;
-  align-items: stretch;
   background: var(--paper);
   border-radius: 14px;
   box-shadow:
@@ -85,27 +71,15 @@ body:not(.home) .layout {
   overflow: hidden;
 }
 
-body:not(.home) .sidebar,
-body:not(.home) .content {
-  background: none;
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-  -webkit-mask-image: none;
-  mask-image: none;
-  padding: 0;
-}
-
-body:not(.home) .sidebar {
+.sidebar {
+  width: var(--sidebar);
   flex: 0 0 var(--sidebar);
   align-self: stretch;
   overflow: hidden;
   padding: 40px 36px 56px 44px;
 }
 
-body:not(.home) .content {
+.content {
   flex: 1 1 auto;
   min-width: 0;
   min-height: 0;
@@ -114,66 +88,16 @@ body:not(.home) .content {
   border-left: 1px solid var(--rule);
 }
 
-/* Horizontal rule under the page header / essay meta */
-body:not(.home) .content > .description,
-body:not(.home) .content > article > .meta {
+/* Horizontal rule under intro / header / essay meta */
+.content > .lede,
+.content > .description,
+.content > article > .meta {
   border-bottom: 1px solid var(--rule);
   padding-bottom: 22px;
   margin-bottom: 28px;
 }
 
-/* ---- Home: frosted glass panels ----------------------------- */
-.home .layout {
-  align-items: flex-start;
-}
-
-.home .sidebar,
-.home .content {
-  background: linear-gradient(
-    160deg,
-    rgba(255, 255, 255, 0.55) 0%,
-    rgba(255, 255, 255, 0.78) 35%,
-    rgba(255, 255, 255, 0.78) 65%,
-    rgba(255, 255, 255, 0.45) 100%
-  );
-  -webkit-backdrop-filter: blur(16px) saturate(1.15);
-  backdrop-filter: blur(16px) saturate(1.15);
-  border-radius: 22px;
-  border: 1px solid rgba(255, 255, 255, 0.45);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
-  -webkit-mask-image: radial-gradient(
-    ellipse 95% 92% at 50% 50%,
-    black 55%,
-    transparent 100%
-  );
-  mask-image: radial-gradient(
-    ellipse 95% 92% at 50% 50%,
-    black 55%,
-    transparent 100%
-  );
-}
-
-.home .sidebar {
-  width: var(--sidebar);
-  flex: 0 0 var(--sidebar);
-  position: sticky;
-  top: 28px;
-  padding: 36px 28px;
-}
-
-.home .content {
-  flex: 1 1 auto;
-  min-width: 0;
-  max-width: var(--measure);
-  padding: 40px 36px 56px;
-}
-
 /* ---- Sidebar ------------------------------------------------ */
-.sidebar {
-  width: var(--sidebar);
-  flex: 0 0 var(--sidebar);
-}
-
 .site-name {
   font-family: var(--font-display);
   font-size: 26px;
@@ -222,11 +146,6 @@ body:not(.home) .content > article > .meta {
 }
 
 /* ---- Content ------------------------------------------------ */
-.content {
-  flex: 1 1 auto;
-  min-width: 0;
-}
-
 h1 {
   font-family: var(--font-display);
   font-size: 32px;
@@ -313,18 +232,13 @@ article blockquote {
 
   .layout {
     flex-direction: column;
-    padding: 18px;
-    gap: 16px;
-  }
-
-  body:not(.home) .layout {
     padding: 0;
     gap: 0;
     height: calc(100vh - (var(--frame) * 2));
     border-radius: 12px;
   }
 
-  body:not(.home) .sidebar {
+  .sidebar {
     width: auto;
     flex: 0 0 auto;
     align-self: stretch;
@@ -334,25 +248,13 @@ article blockquote {
     border-bottom: 1px solid var(--rule);
   }
 
-  body:not(.home) .content {
+  .content {
     flex: 1 1 auto;
     min-height: 0;
     max-width: none;
     overflow-y: auto;
     padding: 22px 22px 40px;
     border-left: none;
-  }
-
-  .home .sidebar {
-    width: auto;
-    flex: none;
-    position: static;
-    padding: 28px 24px;
-  }
-
-  .home .content {
-    padding: 28px 24px 40px;
-    max-width: none;
   }
 
   .site-name { margin-bottom: 4px; }
