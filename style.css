@@ -23,7 +23,7 @@ html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
   background-color: var(--paper);
-  background-image: url("assets/coronation.jpg");
+  background-image: url("assets/villa.jpg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
