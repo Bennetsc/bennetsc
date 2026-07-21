@@ -1,5 +1,6 @@
 /* ============================================================
-   Personal site — Napoleon frosted glass theme.
+   Personal site — villa background with frosted home /
+   framed inner pages.
 
    Web-safe fonts only: no external requests, so the site loads
    instantly, works offline, and depends on no one. Edit the look
@@ -9,12 +10,13 @@
 :root {
   --ink:        #1c1b19;   /* main text                          */
   --ink-soft:   #6f6c65;   /* muted text: descriptions, dates     */
-  --paper:      #fcfbf8;   /* warm off-white fallback             */
+  --paper:      #f7f5f0;   /* solid inner page / fallback         */
   --link:       #345776;   /* restrained ink-blue for links        */
   --link-hover: #213b52;   /* darker on hover                      */
   --rule:       #e7e4dd;   /* hairline dividers                    */
   --measure:    640px;     /* reading width for essays             */
   --sidebar:    220px;     /* sidebar width                        */
+  --frame:      52px;      /* painting margin around inner page   */
 }
 
 * { box-sizing: border-box; }
@@ -50,9 +52,57 @@ a:hover { color: var(--link-hover); }
   gap: 24px;
 }
 
-/* Shared frosted glass that fades into the painting */
-.sidebar,
-.content {
+/* ---- Framed pages (everything except index) ----------------- */
+body:not(.home) {
+  padding: var(--frame);
+}
+
+body:not(.home) .layout {
+  max-width: none;
+  width: 100%;
+  min-height: calc(100vh - (var(--frame) * 2));
+  margin: 0;
+  padding: 40px 44px 56px;
+  gap: 36px;
+  background: var(--paper);
+  border-radius: 14px;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.65) inset,
+    0 12px 40px rgba(0, 0, 0, 0.18),
+    0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+body:not(.home) .sidebar,
+body:not(.home) .content {
+  background: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  -webkit-mask-image: none;
+  mask-image: none;
+  padding: 0;
+}
+
+body:not(.home) .sidebar {
+  position: sticky;
+  top: calc(var(--frame) + 28px);
+  padding-top: 8px;
+}
+
+body:not(.home) .content {
+  max-width: var(--measure);
+  padding-bottom: 24px;
+}
+
+/* ---- Home: frosted glass panels ----------------------------- */
+.home .layout {
+  align-items: flex-start;
+}
+
+.home .sidebar,
+.home .content {
   background: linear-gradient(
     160deg,
     rgba(255, 255, 255, 0.55) 0%,
@@ -77,13 +127,25 @@ a:hover { color: var(--link-hover); }
   );
 }
 
-/* ---- Sidebar ------------------------------------------------ */
-.sidebar {
+.home .sidebar {
   width: var(--sidebar);
   flex: 0 0 var(--sidebar);
   position: sticky;
   top: 28px;
   padding: 36px 28px;
+}
+
+.home .content {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: var(--measure);
+  padding: 40px 36px 56px;
+}
+
+/* ---- Sidebar ------------------------------------------------ */
+.sidebar {
+  width: var(--sidebar);
+  flex: 0 0 var(--sidebar);
 }
 
 .site-name {
@@ -141,8 +203,6 @@ a:hover { color: var(--link-hover); }
 .content {
   flex: 1 1 auto;
   min-width: 0;
-  max-width: var(--measure);
-  padding: 40px 36px 56px;
 }
 
 h1 {
@@ -209,22 +269,50 @@ article blockquote {
 }
 .back:hover { text-decoration: underline; }
 
-/* ---- Mobile: stack the sidebar on top ----------------------- */
+/* ---- Mobile ------------------------------------------------- */
 @media (max-width: 720px) {
   /* fixed backgrounds are unreliable on mobile browsers */
   body { background-attachment: scroll; }
+
+  :root { --frame: 18px; }
 
   .layout {
     flex-direction: column;
     padding: 18px;
     gap: 16px;
   }
-  .sidebar {
+
+  body:not(.home) .layout {
+    padding: 28px 22px 40px;
+    gap: 22px;
+    min-height: calc(100vh - (var(--frame) * 2));
+    border-radius: 12px;
+  }
+
+  body:not(.home) .sidebar {
+    position: static;
+    width: auto;
+    flex: none;
+    padding-top: 0;
+  }
+
+  body:not(.home) .content {
+    max-width: none;
+    padding-bottom: 0;
+  }
+
+  .home .sidebar {
     width: auto;
     flex: none;
     position: static;
     padding: 28px 24px;
   }
+
+  .home .content {
+    padding: 28px 24px 40px;
+    max-width: none;
+  }
+
   .site-name { margin-bottom: 4px; }
   .site-name:last-of-type { margin-bottom: 14px; }
   .nav {
@@ -235,9 +323,5 @@ article blockquote {
   .nav a {
     padding: 8px 16px;
     font-size: 14px;
-  }
-  .content {
-    padding: 28px 24px 40px;
-    max-width: none;
   }
 }
