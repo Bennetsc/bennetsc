@@ -75,6 +75,8 @@ a:hover { color: var(--link-hover); }
   width: var(--sidebar);
   flex: 0 0 var(--sidebar);
   align-self: stretch;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
   padding: 40px 36px 56px 44px;
 }
@@ -103,18 +105,28 @@ a:hover { color: var(--link-hover); }
   font-size: 26px;
   font-weight: 400;
   letter-spacing: -0.01em;
-  margin: 0 0 6px 0;
-}
-.site-name:last-of-type {
-  margin-bottom: 30px; /* space before the nav */
+  margin: 0 0 30px 0;
 }
 .site-name a { color: var(--ink); text-decoration: none; }
 .site-name a:hover { color: var(--ink); }
-.site-name + .site-name a { color: #BA1000; }
-.site-name + .site-name a:hover { color: #BA1000; }
+
+.company-link {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  margin-top: auto;
+  padding-top: 28px;
+}
+.company-link a { color: #BA1000; text-decoration: none; }
+.company-link a:hover { color: #BA1000; }
 
 /* ---- Plain text nav links ----------------------------------- */
-.nav { display: flex; flex-direction: column; gap: 8px; }
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
 .nav a {
   display: inline-block;
   color: var(--ink-soft);
@@ -302,8 +314,12 @@ article blockquote {
     border-left: none;
   }
 
-  .site-name { margin-bottom: 4px; }
-  .site-name:last-of-type { margin-bottom: 14px; }
+  .site-name { margin-bottom: 14px; }
+  .company-link {
+    margin-top: 18px;
+    padding-top: 0;
+    font-size: 18px;
+  }
   .nav {
     flex-direction: row;
     flex-wrap: wrap;
