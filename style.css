@@ -168,6 +168,50 @@ h1 {
   margin: 0 0 38px 0;
 }
 
+/* ---- About sections on the index --------------------------- */
+.about-section {
+  margin: 0 0 36px 0;
+  max-width: 38em;
+}
+
+.about-section h2 {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.25;
+  margin: 0 0 14px 0;
+}
+
+.about-section ul {
+  list-style: disc;
+  margin: 0;
+  padding: 0 0 0 1.25em;
+}
+
+.about-section li {
+  margin: 0 0 10px 0;
+  padding-left: 0.15em;
+}
+
+.about-section li:last-child {
+  margin-bottom: 0;
+}
+
+.about-section .philosophy {
+  list-style: none;
+  padding-left: 0;
+}
+
+.about-section .philosophy li {
+  margin: 0 0 16px 0;
+  padding-left: 0;
+}
+
+.about-section .philosophy strong {
+  font-weight: 600;
+  color: var(--ink);
+}
+
 /* ---- Directory / content list links ------------------------- */
 .content > li > a,
 .content li > a,
