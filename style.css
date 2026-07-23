@@ -116,6 +116,9 @@ a:hover { color: var(--link-hover); }
 .site-name a:hover { color: var(--ink); }
 
 .company-link {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
   font-family: var(--font-display);
   font-size: 22px;
   font-weight: 400;
