@@ -280,6 +280,39 @@ article blockquote {
   font-style: italic;
 }
 
+.essay-figure,
+.essay-gallery figure {
+  margin: 30px 0;
+}
+
+.essay-figure img,
+.essay-gallery img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.essay-figure figcaption,
+.essay-gallery figcaption {
+  margin-top: 8px;
+  color: var(--ink-soft);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.essay-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin: 30px 0;
+}
+
+.essay-gallery figure {
+  margin: 0;
+}
+
 .back {
   display: inline-block;
   margin-top: 48px;
@@ -336,5 +369,9 @@ article blockquote {
   .nav a {
     padding: 0;
     font-size: 14px;
+  }
+
+  .essay-gallery {
+    grid-template-columns: 1fr;
   }
 }
