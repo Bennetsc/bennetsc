@@ -288,8 +288,7 @@ article blockquote {
 .essay-figure img,
 .essay-gallery img {
   display: block;
-  width: 100%;
-  max-width: 100%;
+  width: min(100%, 420px);
   height: auto;
   border-radius: 8px;
 }
